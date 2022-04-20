@@ -18,13 +18,20 @@ defmodule LivekitchenWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    live "/sink", SinkLive
+    live "/register", RegistrationLive
+    live "/user", UserLive
+    live "/place", PlaceLive
+
+    get "/pixelizer", PixelizerController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", LivekitchenWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", LivekitchenWeb do
+    pipe_through :api
 
+    post "/pixel", PlaceController, :create
+  end
+#
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

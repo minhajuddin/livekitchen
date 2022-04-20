@@ -20,6 +20,9 @@ defmodule Livekitchen.Application do
       # {Livekitchen.Worker, arg}
     ]
 
+    :place_pixels = :ets.new(:place_pixels, [:named_table, :public, {:write_concurrency, true}, {:read_concurrency, true}])
+    :ets.insert(:place_pixels, (for  x <- 0..99, y <- 0..99, do: {{x, y}, ["rgba(#{x},#{y},#{(x*y) |> rem(255) |> abs},1)", "r/place"]}))
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Livekitchen.Supervisor]
