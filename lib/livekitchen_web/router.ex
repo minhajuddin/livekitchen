@@ -31,7 +31,8 @@ defmodule LivekitchenWeb.Router do
 
     post "/pixel", PlaceController, :create
   end
-#
+
+  #
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

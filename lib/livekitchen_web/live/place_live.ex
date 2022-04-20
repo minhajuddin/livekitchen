@@ -12,34 +12,37 @@ defmodule LivekitchenWeb.PlaceLive do
       send(self(), :tick)
     end
 
-    {:ok, assign(socket, message: "Hello", pixels: pixels(), player_pixel_counts: player_pixel_counts())}
+    {:ok,
+     assign(socket, message: "Hello", pixels: pixels(), player_pixel_counts: player_pixel_counts())}
   end
 
   def set_pixel(x, y, color, player) when is_binary(x) and is_binary(y) and is_binary(color) do
     case {Integer.parse(x), Integer.parse(y)} do
       {{x, _}, {y, _}} ->
         set_pixel(x, y, color, player)
+
       _ ->
         {:error, :invalid_coords}
     end
   end
 
   def set_pixel(x, y, color, player)
-  when is_integer(x) and is_integer(y) and is_binary(color) do
+      when is_integer(x) and is_integer(y) and is_binary(color) do
     case {x, y} do
       {x, y} when x >= 0 and x < @width and y >= 0 and y < @height ->
         :ets.insert(:place_pixels, {{x, y}, [color, player]})
         {:ok, true}
+
       _ ->
         {:error, :invalid_coords}
     end
   end
 
   def player_pixel_counts() do
-    :ets.tab2list(:place_pixels) 
-    |> Stream.map(fn {_, [_, player]} -> player end) 
-    |> Enum.group_by(& &1) 
-    |> Enum.map(fn {k, vals} -> {k, Enum.count(vals)} end) 
+    :ets.tab2list(:place_pixels)
+    |> Stream.map(fn {_, [_, player]} -> player end)
+    |> Enum.group_by(& &1)
+    |> Enum.map(fn {k, vals} -> {k, Enum.count(vals)} end)
     |> Enum.sort_by(fn {_k, v} -> v end)
   end
 

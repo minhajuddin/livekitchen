@@ -4,11 +4,13 @@ defmodule LivekitchenWeb.PlaceController do
 
   def create(conn, %{"x" => x, "y" => y, "color" => color} = params) do
     player = Map.get(params, "player", "unknown")
+
     case PlaceLive.set_pixel(x, y, color, player) do
       {:ok, _} ->
         conn
         |> put_resp_content_type("application/json")
         |> Plug.Conn.send_resp(:ok, "{}")
+
       {:error, :invalid_coords} ->
         conn
         |> put_resp_content_type("application/json")
