@@ -43,7 +43,7 @@ defmodule LivekitchenWeb.PlaceLive do
     |> Stream.map(fn {_, [_, player]} -> player end)
     |> Enum.group_by(& &1)
     |> Enum.map(fn {k, vals} -> {k, Enum.count(vals)} end)
-    |> Enum.sort_by(fn {_k, v} -> v end)
+    |> Enum.sort_by(fn {_k, v} -> -1 * v end)
   end
 
   defp pixels() do
