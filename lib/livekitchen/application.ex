@@ -33,7 +33,7 @@ defmodule Livekitchen.Application do
       for(
         x <- 0..99,
         y <- 0..99,
-        do: {{x, y}, ["rgba(#{x},#{y},#{(x * y) |> rem(255) |> abs},1)", "r/place"]}
+        do: {{x, y}, ["rgba(#{x},#{y},#{255 - x},1)", "r/place"]}
       )
     )
 
