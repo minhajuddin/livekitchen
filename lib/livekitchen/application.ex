@@ -9,7 +9,7 @@ defmodule Livekitchen.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Livekitchen.Repo,
+      # Livekitchen.Repo,
       # Start the Telemetry supervisor
       LivekitchenWeb.Telemetry,
       # Start the PubSub system
