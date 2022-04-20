@@ -3,8 +3,8 @@ defmodule LivekitchenWeb.PlaceController do
   alias LivekitchenWeb.PlaceLive
 
   def create(conn, %{"x" => x, "y" => y, "color" => color} = params) do
-    author = Map.get(params, "author", "unknown")
-    case PlaceLive.set_pixel(x, y, color, author) do
+    player = Map.get(params, "player", "unknown")
+    case PlaceLive.set_pixel(x, y, color, player) do
       {:ok, _} ->
         conn
         |> put_resp_content_type("application/json")

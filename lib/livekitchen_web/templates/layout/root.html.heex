@@ -20,13 +20,13 @@
             <% end %>
           </ul>
         </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
+        <a href="/place" class="phx-logo">
+          /r/place
         </a>
       </section>
       <section class="container">
         <%= form_tag Routes.place_path(@conn, :create), method: :post, id: "set-pixel-form" do %>
-        <input type="text" name="author" style="display: inline-block;width: 100px;" placeholder="player"/>
+        <input type="text" name="player" style="display: inline-block;width: 100px;" placeholder="player"/>
         <select name="x">
           <%= for x <- 0..99 do  %>
           <option><%= x %></option>
@@ -55,7 +55,7 @@
         let formData = new FormData(setPixelForm);
         let x = formData.get("x");
         let y = formData.get("y");
-        let author = formData.get("author");
+        let player = formData.get("player");
         let color = formData.get("color");
         console.log(`Setting pixel at ${x}, ${y} to ${color}`);
 
@@ -64,7 +64,7 @@
         headers: {
           "content-type": "application/json"
         },
-        body: JSON.stringify({x: x, y: y, color: color, author: author})
+        body: JSON.stringify({x: x, y: y, color: color, player: player})
       })
       .then(response => response.json())
       .then(data => console.log("RESPONSE", data));
