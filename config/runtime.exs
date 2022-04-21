@@ -48,7 +48,7 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "entidplace.fly.dev"
+  host = System.get_env("PHX_HOST") || "place.hyperngn.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :livekitchen, LivekitchenWeb.Endpoint,
