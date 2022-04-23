@@ -92,4 +92,6 @@ USER nobody
 CMD ["/app/bin/server"]
 # Appended by flyctl
 ENV ECTO_IPV6 true
-# ENV ERL_AFLAGS "-proto_dist inet6_tcp"
+# +S 2:2 This is a tiny app and shouldn't be consuming more than 2 cores
+# We don't need empd because this is a single instance
+ENV ERL_AFLAGS "+S 2:2 -no_epmd"
